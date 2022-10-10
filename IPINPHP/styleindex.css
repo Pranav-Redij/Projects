@@ -1,0 +1,18 @@
+body{
+    background-image: url(homeimg.png);
+}
+h1,h6{
+    font-family: sans-serif;
+    color: white;
+}
+h4{
+    font-family: sans-serif;
+    color: whitesmoke;
+    margin-top: 25px;
+}
+.hometext{
+    font-weight: 400;
+    font-size: 80%;
+    margin-top: 250px;
+    margin-left: 150px;
+}

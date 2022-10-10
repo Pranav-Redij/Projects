@@ -1,0 +1,50 @@
+body{
+    background-color: black;
+}
+h6{
+    font-size: 40px;
+    color: white;
+
+}
+.mainbody{
+    max-width: 80%;
+    padding: 34px;
+    margin: auto;
+    font-weight: 400;
+    align-self: center;
+   margin-left: 600px;
+   margin-top: 70px;
+}
+.mainbody h6{
+    text-align: center;
+}
+input,textarea{
+    border: 2px gray;
+    border-radius: 10px;
+    outline: none;
+    width: 100%;
+    margin: 11px;
+    padding: 7px;
+    font-size: 24px;
+}
+.formarea{
+    max-width: 80%;
+    padding: 34px;
+    margin: auto;
+    font-weight: 400;
+    align-self: center; 
+}
+.btn{
+    font-size: 30px;
+    font-weight: 400;
+    background: white;
+    align-self: center; 
+    margin-left:550px;
+    padding: 5px 12px;
+}
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
