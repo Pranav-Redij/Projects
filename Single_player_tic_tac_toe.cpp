@@ -1,4 +1,9 @@
+//have single player and double player mode
+//single player have difficulty level of hard and easy
+//hard=minmax algo using ai concept
+//easy=using random function
 #include<iostream>
+#include<vector>
 using namespace std;
 int choice;
 char turn='X';
@@ -241,6 +246,93 @@ int findoutbest()
     int map[3][3]={{1,2,3},{4,5,6},{7,8,9}};
     return map[ni][nj];
 }
+int findoutrandom()
+{
+    int ni,nj;
+    vector<pair<int,int> >position;
+    position.clear();
+    for(int i=0;i<=2;i++)
+    {
+      for(int j=0;j<=2;j++)
+      {
+        if(board[i][j]!='X' && board[i][j]!='O')
+        {
+          //it is empty and we can place there 
+          position.push_back(make_pair(i,j));
+        }
+      }
+    }
+    int size=position.size();
+    int posi=random()%size;
+    ni=position[posi].first;
+    nj=position[posi].second;
+    int map[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+    return map[ni][nj];
+}
+void computer_player_turn_random()
+{
+   choice=findoutrandom();
+
+   switch(choice)
+ {
+   case 1:
+   row=0;
+   column=0;
+   break;
+   case 2:
+   row=0;
+   column=1;
+   break;
+   case 3:
+   row=0;
+   column=2;
+   break;
+   case 4:
+   row=1;
+   column=0;
+   break;
+   case 5:
+   row=1;
+   column=1;
+   break;
+   case 6:
+   row=1;
+   column=2;
+   break;
+   case 7:
+   row=2;
+   column=0;
+   break;
+   case 8:
+   row=2;
+   column=1;
+   break;
+   case 9:
+    row=2;
+    column=2;
+   break;
+   default:
+   cout<<"Invalid choice"<<endl;
+   cout<<"Please try again \n";
+    computer_player_turn_random();
+    return;
+   //break; 
+  }
+  if(turn=='X' && board[row][column]!='X' && board[row][column]!='O' )
+  {
+    board[row][column]='X';
+    turn='O';
+  }
+  else if(turn=='O' && board[row][column]!='X' && board[row][column]!='O')
+  {
+    board[row][column]='O';
+    turn='X';
+  }else{
+    cout<<"Wrong choice!!!!! \n Please try again \n";
+    player_turn();
+    return;
+  }
+}
 void computer_player_turn()
 {
    choice=findoutbest();
@@ -344,30 +436,70 @@ void doubleplayer()
 }
 void singleplayer()
 {
-  while(gameover())
+  cout<<"1.HARD 2.EASY";
+  cout<<"\n CHOOSE THE DIFFICULTY LEVEL:";
+  int diff=0;
+  cin>>diff;
+
+  if(diff==1)
   {
-    display_board();
-    if(turn=='X')
+    while(gameover())
     {
-      player_turn();
-    }else{
-      //computer will take decision
-      computer_player_turn();
+      display_board();
+      if(turn=='X')
+      {
+        player_turn();
+      }else{
+        //computer will take decision
+        computer_player_turn();
+      }
+      gameover();
     }
-    gameover();
-  }
-  if(turn=='X'&& draw==false)
+    if(turn=='X'&& draw==false)
+    {
+      display_board();  
+      cout<<"Player2 [O] Win's!!! \n";
+    }
+    else if(turn=='O' && draw==false)
+    {
+      display_board();  
+      cout<<"Player1 [X] Win's!!! \n";
+    }else{
+      cout<<"draw\n";
+    }
+  }else if(diff==2)
   {
-    display_board();  
-    cout<<"Player2 [O] Win's!!! \n";
-  }
-  else if(turn=='O' && draw==false)
-  {
-    display_board();  
-    cout<<"Player1 [X] Win's!!! \n";
+    //easy where we take decision based on random function
+     while(gameover())
+    {
+      display_board();
+      if(turn=='X')
+      {
+        player_turn();
+      }else{
+        //computer will take decision
+        computer_player_turn_random();
+      }
+      gameover();
+    }
+    if(turn=='X'&& draw==false)
+    {
+      display_board();  
+      cout<<"Player2 [O] Win's!!! \n";
+    }
+    else if(turn=='O' && draw==false)
+    {
+      display_board();  
+      cout<<"Player1 [X] Win's!!! \n";
+    }else{
+      cout<<"draw\n";
+    }
   }else{
-    cout<<"draw\n";
+    cout<<"\n INVALID CHOICE!!!!!"<<endl<<"Try Again\n";
+    singleplayer();
+    return;
   }
+  
 }
 int main()
 { 
